@@ -1767,7 +1767,10 @@ PFNGLVIEWPORTPROC glad_debug_glViewport = glad_debug_impl_glViewport;
 
 static void glad_gl_load_GL_ES_VERSION_2_0(GLADuserptrloadfunc load,
                                            void *userptr) {
+
+  printf("egl version2: %i", GLAD_GL_ES_VERSION_2_0);
   if (!GLAD_GL_ES_VERSION_2_0)
+
     return;
   glad_glActiveTexture =
       (PFNGLACTIVETEXTUREPROC)load(userptr, "glActiveTexture");
