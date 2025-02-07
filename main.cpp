@@ -4,6 +4,8 @@
 #include "glad/gles2.h"
 #include "incbin.h"
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 static const EGLint configAttribs[] = {EGL_SURFACE_TYPE,
                                        EGL_PBUFFER_BIT,
                                        EGL_BLUE_SIZE,
@@ -75,6 +77,22 @@ void init_tex2d(GLuint tex, int w, int h, GLenum fmt) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE,
                nullptr);
+}
+struct Img {
+  int w, h;
+  GLenum fmt;
+  GLuint tex;
+};
+Img load_img(const char *path) {
+  Img img;
+  int c;
+  void *data = stbi_load(path, &img.w, &img.h, &c, 3);
+  if (data == nullptr) {
+    std::cerr << "Failed to open: " << path << "\n";
+    exit(1);
+  }
+  stbi_image_free(data);
+  return img;
 }
 
 GLuint create_prog(const char *vert, const char *frag) {
@@ -157,6 +175,7 @@ int main() {
   }
 
   std::cout << "API version: " << gladLoaderLoadGLES2() << "\n";
+  std::cout << "GLES extensions: " << glGetString(GL_EXTENSIONS) << "\n";
   GLuint simple_shdr = create_prog(gsimple_vertData, gsimple_fragData);
   GLuint tex[2];
   glGenTextures(2, tex);
