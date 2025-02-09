@@ -18,14 +18,6 @@ static const EGLint configAttribs[] = {EGL_SURFACE_TYPE,
                                        EGL_OPENGL_ES2_BIT,
                                        EGL_NONE};
 
-static const int pbufferWidth = 32;
-static const int pbufferHeight = 32;
-INCTXT(simple_vert, "shaders/simple.vert");
-INCTXT(simple_frag, "shaders/simple.frag");
-
-static const EGLint pbufferAttribs[] = {
-    EGL_WIDTH, pbufferWidth, EGL_HEIGHT, pbufferHeight, EGL_NONE,
-};
 std::string egl_error_string(EGLint error) {
   switch (error) {
   case EGL_SUCCESS:
@@ -69,20 +61,29 @@ void print_gl_error(const char *ctx = "") {
   }
 }
 
-void init_tex2d(GLuint tex, int w, int h, GLenum fmt) {
+void init_tex2d(GLuint tex, int w, int h, GLenum fmt, GLenum data_fmt = GL_RGB,
+                void *data = 0) {
   glBindTexture(GL_TEXTURE_2D, tex);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE,
-               nullptr);
+  glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, data_fmt, GL_UNSIGNED_BYTE,
+               data);
 }
 struct Img {
   int w, h;
   GLenum fmt;
   GLuint tex;
 };
+
+static const int pbufferWidth = 640;
+static const int pbufferHeight = 640;
+static const EGLint pbufferAttribs[] = {
+    EGL_WIDTH, pbufferWidth, EGL_HEIGHT, pbufferHeight, EGL_NONE,
+};
+INCTXT(simple_vert, "shaders/simple.vert");
+INCTXT(simple_frag, "shaders/simple.frag");
 Img load_img(const char *path) {
   Img img;
   int c;
@@ -91,6 +92,9 @@ Img load_img(const char *path) {
     std::cerr << "Failed to open: " << path << "\n";
     exit(1);
   }
+  glGenTextures(1, &img.tex);
+  init_tex2d(img.tex, img.w, img.h, GL_RGB8_OES, GL_RGB, data);
+  ;
   stbi_image_free(data);
   return img;
 }
@@ -177,28 +181,8 @@ int main() {
   std::cout << "API version: " << gladLoaderLoadGLES2() << "\n";
   std::cout << "GLES extensions: " << glGetString(GL_EXTENSIONS) << "\n";
   GLuint simple_shdr = create_prog(gsimple_vertData, gsimple_fragData);
-  GLuint tex[2];
-  glGenTextures(2, tex);
-  GLuint high_tex = tex[0];
-  GLuint low_tex = tex[1];
-  GLenum low_fmt = GL_RGBA;
-  GLenum high_fmt = GL_RGBA;
-  int high_w = 1920;
-  int high_h = 1536;
-
-  int low_w = 640;
-  int low_h = 640;
-
-  init_tex2d(high_tex, high_w, high_h, high_fmt);
-  init_tex2d(low_tex, low_w, low_h, low_fmt);
-  GLuint fb;
-  glGenFramebuffers(1, &fb);
-  glBindFramebuffer(GL_FRAMEBUFFER, fb);
-  glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                         low_tex, 0);
 
   while (true) {
-    glBindFramebuffer(GL_FRAMEBUFFER, fb);
 
     eglSwapBuffers(eglDpy, eglSurf);
   }
