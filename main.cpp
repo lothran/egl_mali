@@ -4,8 +4,13 @@
 #include "glad/gles2.h"
 #include "incbin.h"
 #include <iostream>
+#include <ostream>
+#include <vector>
 #define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image.h"
+#include "stbi_image_write.h"
+#include <chrono>
 static const EGLint configAttribs[] = {EGL_SURFACE_TYPE,
                                        EGL_PBUFFER_BIT,
                                        EGL_BLUE_SIZE,
@@ -181,11 +186,41 @@ int main() {
   std::cout << "API version: " << gladLoaderLoadGLES2() << "\n";
   std::cout << "GLES extensions: " << glGetString(GL_EXTENSIONS) << "\n";
   GLuint simple_shdr = create_prog(gsimple_vertData, gsimple_fragData);
+  std::vector<float> fullscreen_quad = {-1, -1, 1, -1, -1, 1,
+                                        -1, 1,  1, -1, 1,  1};
+  GLuint fullscreen_quad_buf;
+  glGenBuffers(1, &fullscreen_quad_buf);
+  glBindTexture(GL_ARRAY_BUFFER, fullscreen_quad_buf);
+  glBufferData(GL_ARRAY_BUFFER, fullscreen_quad.size() * 4,
+               fullscreen_quad.data(), GL_STATIC_DRAW);
+  glUseProgram(simple_shdr);
+  int loc = glGetAttribLocation(simple_shdr, "pos");
+  glEnableVertexAttribArray(loc);
+  glVertexAttribPointer(loc, 2, GL_FLOAT, GL_FALSE, 0, fullscreen_quad.data());
+  auto img = load_img("test.jpg");
 
-  while (true) {
+  glClearColor(1.0, 0.0, 0.0, 1.0);
+  glClear(GL_COLOR_BUFFER_BIT);
 
+  std::vector<char> buffer(pbufferHeight * pbufferWidth * 4);
+  for (int i = 0; i < 100; i++) {
+    auto t0 = std::chrono::high_resolution_clock::now();
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     eglSwapBuffers(eglDpy, eglSurf);
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    std::cout << "Took: "
+              << std::chrono::duration<double>(t1 - t0).count() / 1000
+              << "ms\n";
+
+    glReadPixels(0, 0, pbufferWidth, pbufferHeight, GL_RGB, GL_UNSIGNED_BYTE,
+                 buffer.data());
   }
+
+  stbi_write_png("out.png", pbufferWidth, pbufferHeight, 3, buffer.data(),
+                 pbufferWidth * 3);
 
   // 6. Terminate EGL when finished
   eglTerminate(eglDpy);
