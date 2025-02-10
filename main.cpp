@@ -2,7 +2,6 @@
 
 #include "glad/egl.h"
 #include "glad/gles2.h"
-#include "incbin.h"
 #include <iostream>
 #include <ostream>
 #include <vector>
@@ -11,6 +10,8 @@
 #include "stb_image.h"
 #include "stbi_image_write.h"
 #include <chrono>
+#include <fstream>
+#include <streambuf>
 static const EGLint configAttribs[] = {EGL_SURFACE_TYPE,
                                        EGL_PBUFFER_BIT,
                                        EGL_BLUE_SIZE,
@@ -22,6 +23,12 @@ static const EGLint configAttribs[] = {EGL_SURFACE_TYPE,
                                        EGL_RENDERABLE_TYPE,
                                        EGL_OPENGL_ES2_BIT,
                                        EGL_NONE};
+std::string read_file(const char *path) {
+  std::ifstream t(path);
+  std::string str((std::istreambuf_iterator<char>(t)),
+                  std::istreambuf_iterator<char>());
+  return str;
+}
 
 std::string egl_error_string(EGLint error) {
   switch (error) {
@@ -87,8 +94,6 @@ static const int pbufferHeight = 640;
 static const EGLint pbufferAttribs[] = {
     EGL_WIDTH, pbufferWidth, EGL_HEIGHT, pbufferHeight, EGL_NONE,
 };
-INCTXT(simple_vert, "shaders/simple.vert");
-INCTXT(simple_frag, "shaders/simple.frag");
 Img load_img(const char *path) {
   Img img;
   int c;
@@ -105,21 +110,28 @@ Img load_img(const char *path) {
 }
 
 GLuint create_prog(const char *vert, const char *frag) {
+  auto vert_src = read_file(vert);
+  auto frag_src = read_file(frag);
   unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShader, 1, &vert, NULL);
+  const char *ptr = vert_src.data();
+  glShaderSource(vertexShader, 1, &ptr, NULL);
   glCompileShader(vertexShader);
   // check for shader compile errors
   int success;
   char infoLog[512];
   glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
   if (!success) {
+    GLint logLength;
+    glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &logLength);
     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
     std::cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
+              << logLength << "\n"
               << infoLog << std::endl;
   }
   // fragment shader
   unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShader, 1, &frag, NULL);
+  ptr = frag_src.data();
+  glShaderSource(fragmentShader, 1, &ptr, NULL);
   glCompileShader(fragmentShader);
   // check for shader compile errors
   glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
@@ -185,7 +197,8 @@ int main() {
 
   std::cout << "API version: " << gladLoaderLoadGLES2() << "\n";
   std::cout << "GLES extensions: " << glGetString(GL_EXTENSIONS) << "\n";
-  GLuint simple_shdr = create_prog(gsimple_vertData, gsimple_fragData);
+  GLuint simple_shdr =
+      create_prog("shaders/simple.vert", "shaders/simple.frag");
   std::vector<float> fullscreen_quad = {-1, -1, 1, -1, -1, 1,
                                         -1, 1,  1, -1, 1,  1};
   GLuint fullscreen_quad_buf;

@@ -1,3 +1,4 @@
+#version 100
 attribute vec2 pos;
 varying vec2 v_uv;
 
