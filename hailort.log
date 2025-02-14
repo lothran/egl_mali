@@ -1,0 +1,283 @@
+[2021-11-20 01:21:23.968] [12894] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.36-xilinx-v2022.2 #1 SMP Mon Oct 3 07:50:07 UTC 2022 aarch64
+[2021-11-20 01:21:23.968] [12894] [HailoRT] [info] [control.cpp:100] [control__parse_identify_results] firmware_version is: 4.17.0
+[2021-11-20 01:21:23.968] [12894] [HailoRT] [info] [vdevice.cpp:566] [create] VDevice Infos: 0000:01:00.0
+[2021-11-20 01:21:26.940] [12894] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-20 01:21:26.941] [12894] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-20 01:21:26.986] [12894] [HailoRT] [info] [internal_buffer_manager.cpp:206] [print_execution_results] Default Internal buffer planner failed to meet requirements
+[2021-11-20 01:21:26.986] [12894] [HailoRT] [info] [internal_buffer_manager.cpp:216] [print_execution_results] Default Internal buffer planner executed successfully
+[2021-11-20 01:21:27.010] [12894] [HailoRT] [info] [device_internal.cpp:58] [configure] Configuring HEF took 31.124751 milliseconds
+[2021-11-20 01:21:27.011] [12894] [HailoRT] [info] [vdevice.cpp:665] [configure] Configuring HEF on VDevice took 32.432795 milliseconds
+[2021-11-20 01:21:27.011] [12894] [HailoRT] [info] [multi_io_elements.cpp:756] [create] Created (AsyncHwEl)
+[2021-11-20 01:21:27.015] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (EntryPushQEl0yolov8s/input_layer1 | timeout: 10s)
+[2021-11-20 01:21:27.015] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | timeout: 10s)
+[2021-11-20 01:21:27.015] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | timeout: 10s)
+[2021-11-20 01:21:27.016] [12894] [HailoRT] [info] [multi_io_elements.cpp:156] [create] Created (NmsPPMuxEl0YOLOV8-Post-Process | Op YOLOV8, Name: YOLOV8-Post-Process, Score threshold: 0.200, IoU threshold: 0.70, Classes: 80, Cross classes: false, Max bboxes per class: 100, Image height: 640, Image width: 640)
+[2021-11-20 01:21:27.016] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms1yolov8s/conv41_98 | timeout: 10s)
+[2021-11-20 01:21:27.016] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms0yolov8s/conv42_98 | timeout: 10s)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms4yolov8s/conv52_98 | timeout: 10s)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms2yolov8s/conv53_98 | timeout: 10s)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms5yolov8s/conv62_98 | timeout: 10s)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms8yolov8s/conv63_98 | timeout: 10s)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [edge_elements.cpp:191] [create] Created (LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process)
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] EntryPushQEl0yolov8s/input_layer1 | inputs: user | outputs: PixBufEl0yolov8s/input_layer1
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PixBufEl0yolov8s/input_layer1 | inputs: EntryPushQEl0yolov8s/input_layer1 | outputs: PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv
+[2021-11-20 01:21:27.017] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] AsyncHwEl | inputs: PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | outputs: PushQEl_nms8yolov8s/conv63_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms8yolov8s/conv63_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] NmsPPMuxEl0YOLOV8-Post-Process | inputs: PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms8yolov8s/conv63_98 | outputs: LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process | inputs: NmsPPMuxEl0YOLOV8-Post-Process | outputs: user
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms5yolov8s/conv62_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms4yolov8s/conv52_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms2yolov8s/conv53_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms1yolov8s/conv41_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms0yolov8s/conv42_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:27.018] [12894] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-20 01:21:27.032] [12894] [HailoRT] [info] [async_infer_runner.cpp:86] [shutdown] Pipeline was aborted. Shutting it down
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element EntryPushQEl0yolov8s/input_layer1 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element EntryPushQEl0yolov8s/input_layer1 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.033] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms1yolov8s/conv41_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.036] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms0yolov8s/conv42_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.038] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms4yolov8s/conv52_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.039] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms2yolov8s/conv53_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.040] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms5yolov8s/conv62_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:27.040] [12894] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms8yolov8s/conv63_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:21:42.444] [13420] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.36-xilinx-v2022.2 #1 SMP Mon Oct 3 07:50:07 UTC 2022 aarch64
+[2021-11-20 01:21:42.444] [13420] [HailoRT] [info] [control.cpp:100] [control__parse_identify_results] firmware_version is: 4.17.0
+[2021-11-20 01:21:42.444] [13420] [HailoRT] [info] [vdevice.cpp:566] [create] VDevice Infos: 0000:01:00.0
+[2021-11-20 01:21:42.691] [13420] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-20 01:21:42.691] [13420] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-20 01:21:42.718] [13420] [HailoRT] [info] [internal_buffer_manager.cpp:206] [print_execution_results] Default Internal buffer planner failed to meet requirements
+[2021-11-20 01:21:42.718] [13420] [HailoRT] [info] [internal_buffer_manager.cpp:216] [print_execution_results] Default Internal buffer planner executed successfully
+[2021-11-20 01:21:42.742] [13420] [HailoRT] [info] [device_internal.cpp:58] [configure] Configuring HEF took 31.380484 milliseconds
+[2021-11-20 01:21:42.743] [13420] [HailoRT] [info] [vdevice.cpp:665] [configure] Configuring HEF on VDevice took 32.231912 milliseconds
+[2021-11-20 01:21:42.743] [13420] [HailoRT] [info] [multi_io_elements.cpp:756] [create] Created (AsyncHwEl)
+[2021-11-20 01:21:42.744] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (EntryPushQEl0yolov8s/input_layer1 | timeout: 10s)
+[2021-11-20 01:21:42.744] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | timeout: 10s)
+[2021-11-20 01:21:42.744] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | timeout: 10s)
+[2021-11-20 01:21:42.744] [13420] [HailoRT] [info] [multi_io_elements.cpp:156] [create] Created (NmsPPMuxEl0YOLOV8-Post-Process | Op YOLOV8, Name: YOLOV8-Post-Process, Score threshold: 0.200, IoU threshold: 0.70, Classes: 80, Cross classes: false, Max bboxes per class: 100, Image height: 640, Image width: 640)
+[2021-11-20 01:21:42.744] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms1yolov8s/conv41_98 | timeout: 10s)
+[2021-11-20 01:21:42.745] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms0yolov8s/conv42_98 | timeout: 10s)
+[2021-11-20 01:21:42.745] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms4yolov8s/conv52_98 | timeout: 10s)
+[2021-11-20 01:21:42.745] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms2yolov8s/conv53_98 | timeout: 10s)
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms5yolov8s/conv62_98 | timeout: 10s)
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms8yolov8s/conv63_98 | timeout: 10s)
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [edge_elements.cpp:191] [create] Created (LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process)
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] EntryPushQEl0yolov8s/input_layer1 | inputs: user | outputs: PixBufEl0yolov8s/input_layer1
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PixBufEl0yolov8s/input_layer1 | inputs: EntryPushQEl0yolov8s/input_layer1 | outputs: PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] AsyncHwEl | inputs: PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | outputs: PushQEl_nms8yolov8s/conv63_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms8yolov8s/conv63_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] NmsPPMuxEl0YOLOV8-Post-Process | inputs: PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms8yolov8s/conv63_98 | outputs: LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process | inputs: NmsPPMuxEl0YOLOV8-Post-Process | outputs: user
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms5yolov8s/conv62_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms4yolov8s/conv52_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms2yolov8s/conv53_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms1yolov8s/conv41_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms0yolov8s/conv42_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-20 01:21:42.746] [13420] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-20 01:21:42.877] [13433] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-20 01:22:08.950] [13420] [HailoRT] [info] [async_infer_runner.cpp:86] [shutdown] Pipeline was aborted. Shutting it down
+[2021-11-20 01:22:08.951] [13442] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms1yolov8s/conv41_98 is not running anymore, exiting..
+[2021-11-20 01:22:08.951] [13445] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms2yolov8s/conv53_98 is not running anymore, exiting..
+[2021-11-20 01:22:08.951] [13443] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms0yolov8s/conv42_98 is not running anymore, exiting..
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.951] [13420] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element EntryPushQEl0yolov8s/input_layer1 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-20 01:22:08.952] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element EntryPushQEl0yolov8s/input_layer1 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.952] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.952] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.952] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms1yolov8s/conv41_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.953] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms0yolov8s/conv42_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.955] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms4yolov8s/conv52_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.956] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms2yolov8s/conv53_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.957] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms5yolov8s/conv62_98 has 0 frames in his Queue on destruction
+[2021-11-20 01:22:08.957] [13420] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms8yolov8s/conv63_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:04.211] [9106] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.36-xilinx-v2022.2 #1 SMP Mon Oct 3 07:50:07 UTC 2022 aarch64
+[2021-11-19 19:21:04.212] [9106] [HailoRT] [info] [control.cpp:100] [control__parse_identify_results] firmware_version is: 4.17.0
+[2021-11-19 19:21:04.212] [9106] [HailoRT] [info] [vdevice.cpp:566] [create] VDevice Infos: 0000:01:00.0
+[2021-11-19 19:21:07.180] [9106] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 19:21:07.180] [9106] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 19:21:07.225] [9106] [HailoRT] [info] [internal_buffer_manager.cpp:206] [print_execution_results] Default Internal buffer planner failed to meet requirements
+[2021-11-19 19:21:07.225] [9106] [HailoRT] [info] [internal_buffer_manager.cpp:216] [print_execution_results] Default Internal buffer planner executed successfully
+[2021-11-19 19:21:07.249] [9106] [HailoRT] [info] [device_internal.cpp:58] [configure] Configuring HEF took 30.174352 milliseconds
+[2021-11-19 19:21:07.249] [9106] [HailoRT] [info] [vdevice.cpp:665] [configure] Configuring HEF on VDevice took 31.453985 milliseconds
+[2021-11-19 19:21:07.250] [9106] [HailoRT] [info] [multi_io_elements.cpp:756] [create] Created (AsyncHwEl)
+[2021-11-19 19:21:07.254] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (EntryPushQEl0yolov8s/input_layer1 | timeout: 10s)
+[2021-11-19 19:21:07.254] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | timeout: 10s)
+[2021-11-19 19:21:07.254] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | timeout: 10s)
+[2021-11-19 19:21:07.254] [9106] [HailoRT] [info] [multi_io_elements.cpp:156] [create] Created (NmsPPMuxEl0YOLOV8-Post-Process | Op YOLOV8, Name: YOLOV8-Post-Process, Score threshold: 0.200, IoU threshold: 0.70, Classes: 80, Cross classes: false, Max bboxes per class: 100, Image height: 640, Image width: 640)
+[2021-11-19 19:21:07.255] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms1yolov8s/conv41_98 | timeout: 10s)
+[2021-11-19 19:21:07.255] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms0yolov8s/conv42_98 | timeout: 10s)
+[2021-11-19 19:21:07.255] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms4yolov8s/conv52_98 | timeout: 10s)
+[2021-11-19 19:21:07.255] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms2yolov8s/conv53_98 | timeout: 10s)
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms5yolov8s/conv62_98 | timeout: 10s)
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms8yolov8s/conv63_98 | timeout: 10s)
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [edge_elements.cpp:191] [create] Created (LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process)
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] EntryPushQEl0yolov8s/input_layer1 | inputs: user | outputs: PixBufEl0yolov8s/input_layer1
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PixBufEl0yolov8s/input_layer1 | inputs: EntryPushQEl0yolov8s/input_layer1 | outputs: PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 19:21:07.256] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] AsyncHwEl | inputs: PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | outputs: PushQEl_nms8yolov8s/conv63_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98
+[2021-11-19 19:21:07.260] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms8yolov8s/conv63_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.260] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] NmsPPMuxEl0YOLOV8-Post-Process | inputs: PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms8yolov8s/conv63_98 | outputs: LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.260] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process | inputs: NmsPPMuxEl0YOLOV8-Post-Process | outputs: user
+[2021-11-19 19:21:07.260] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms5yolov8s/conv62_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.260] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms4yolov8s/conv52_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.261] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms2yolov8s/conv53_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.261] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms1yolov8s/conv41_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.261] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms0yolov8s/conv42_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:07.261] [9106] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 19:21:07.274] [9106] [HailoRT] [info] [async_infer_runner.cpp:86] [shutdown] Pipeline was aborted. Shutting it down
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.275] [9106] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element EntryPushQEl0yolov8s/input_layer1 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 19:21:07.276] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element EntryPushQEl0yolov8s/input_layer1 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.276] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.276] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.276] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms1yolov8s/conv41_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.277] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms0yolov8s/conv42_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.279] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms4yolov8s/conv52_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.280] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms2yolov8s/conv53_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.281] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms5yolov8s/conv62_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:07.281] [9106] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms8yolov8s/conv63_98 has 0 frames in his Queue on destruction
+[2021-11-19 19:21:50.039] [10427] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.36-xilinx-v2022.2 #1 SMP Mon Oct 3 07:50:07 UTC 2022 aarch64
+[2021-11-19 19:21:50.040] [10427] [HailoRT] [info] [control.cpp:100] [control__parse_identify_results] firmware_version is: 4.17.0
+[2021-11-19 19:21:50.040] [10427] [HailoRT] [info] [vdevice.cpp:566] [create] VDevice Infos: 0000:01:00.0
+[2021-11-19 19:21:50.287] [10427] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 19:21:50.287] [10427] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 19:21:50.313] [10427] [HailoRT] [info] [internal_buffer_manager.cpp:206] [print_execution_results] Default Internal buffer planner failed to meet requirements
+[2021-11-19 19:21:50.313] [10427] [HailoRT] [info] [internal_buffer_manager.cpp:216] [print_execution_results] Default Internal buffer planner executed successfully
+[2021-11-19 19:21:50.337] [10427] [HailoRT] [info] [device_internal.cpp:58] [configure] Configuring HEF took 29.96446 milliseconds
+[2021-11-19 19:21:50.337] [10427] [HailoRT] [info] [vdevice.cpp:665] [configure] Configuring HEF on VDevice took 30.829519 milliseconds
+[2021-11-19 19:21:50.338] [10427] [HailoRT] [info] [multi_io_elements.cpp:756] [create] Created (AsyncHwEl)
+[2021-11-19 19:21:50.338] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (EntryPushQEl0yolov8s/input_layer1 | timeout: 10s)
+[2021-11-19 19:21:50.338] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | timeout: 10s)
+[2021-11-19 19:21:50.338] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | timeout: 10s)
+[2021-11-19 19:21:50.339] [10427] [HailoRT] [info] [multi_io_elements.cpp:156] [create] Created (NmsPPMuxEl0YOLOV8-Post-Process | Op YOLOV8, Name: YOLOV8-Post-Process, Score threshold: 0.200, IoU threshold: 0.70, Classes: 80, Cross classes: false, Max bboxes per class: 100, Image height: 640, Image width: 640)
+[2021-11-19 19:21:50.339] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms1yolov8s/conv41_98 | timeout: 10s)
+[2021-11-19 19:21:50.339] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms0yolov8s/conv42_98 | timeout: 10s)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms4yolov8s/conv52_98 | timeout: 10s)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms2yolov8s/conv53_98 | timeout: 10s)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms5yolov8s/conv62_98 | timeout: 10s)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms8yolov8s/conv63_98 | timeout: 10s)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [edge_elements.cpp:191] [create] Created (LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process)
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] EntryPushQEl0yolov8s/input_layer1 | inputs: user | outputs: PixBufEl0yolov8s/input_layer1
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PixBufEl0yolov8s/input_layer1 | inputs: EntryPushQEl0yolov8s/input_layer1 | outputs: PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 19:21:50.340] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] AsyncHwEl | inputs: PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | outputs: PushQEl_nms8yolov8s/conv63_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms8yolov8s/conv63_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] NmsPPMuxEl0YOLOV8-Post-Process | inputs: PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms8yolov8s/conv63_98 | outputs: LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process | inputs: NmsPPMuxEl0YOLOV8-Post-Process | outputs: user
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms5yolov8s/conv62_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms4yolov8s/conv52_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms2yolov8s/conv53_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms1yolov8s/conv41_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms0yolov8s/conv42_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 19:21:50.341] [10427] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 19:21:50.472] [10440] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 18:56:57.344] [2452] [HailoRT] [info] [device.cpp:46] [Device] OS Version: Linux 5.15.36-xilinx-v2022.2 #1 SMP Mon Oct 3 07:50:07 UTC 2022 aarch64
+[2021-11-19 18:56:57.345] [2452] [HailoRT] [info] [control.cpp:100] [control__parse_identify_results] firmware_version is: 4.17.0
+[2021-11-19 18:56:57.345] [2452] [HailoRT] [info] [vdevice.cpp:566] [create] VDevice Infos: 0000:01:00.0
+[2021-11-19 18:57:00.426] [2452] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 18:57:00.426] [2452] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 18:57:00.805] [2452] [HailoRT] [info] [internal_buffer_manager.cpp:206] [print_execution_results] Default Internal buffer planner failed to meet requirements
+[2021-11-19 18:57:00.805] [2452] [HailoRT] [info] [internal_buffer_manager.cpp:216] [print_execution_results] Default Internal buffer planner executed successfully
+[2021-11-19 18:57:00.829] [2452] [HailoRT] [info] [device_internal.cpp:58] [configure] Configuring HEF took 30.942379 milliseconds
+[2021-11-19 18:57:00.829] [2452] [HailoRT] [info] [vdevice.cpp:665] [configure] Configuring HEF on VDevice took 32.206262 milliseconds
+[2021-11-19 18:57:00.830] [2452] [HailoRT] [info] [multi_io_elements.cpp:756] [create] Created (AsyncHwEl)
+[2021-11-19 18:57:00.834] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (EntryPushQEl0yolov8s/input_layer1 | timeout: 10s)
+[2021-11-19 18:57:00.834] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | timeout: 10s)
+[2021-11-19 18:57:00.834] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | timeout: 10s)
+[2021-11-19 18:57:00.834] [2452] [HailoRT] [info] [multi_io_elements.cpp:156] [create] Created (NmsPPMuxEl0YOLOV8-Post-Process | Op YOLOV8, Name: YOLOV8-Post-Process, Score threshold: 0.200, IoU threshold: 0.70, Classes: 80, Cross classes: false, Max bboxes per class: 100, Image height: 640, Image width: 640)
+[2021-11-19 18:57:00.835] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms1yolov8s/conv41_98 | timeout: 10s)
+[2021-11-19 18:57:00.835] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms0yolov8s/conv42_98 | timeout: 10s)
+[2021-11-19 18:57:00.835] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms4yolov8s/conv52_98 | timeout: 10s)
+[2021-11-19 18:57:00.835] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms2yolov8s/conv53_98 | timeout: 10s)
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms5yolov8s/conv62_98 | timeout: 10s)
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [queue_elements.cpp:420] [create] Created (PushQEl_nms8yolov8s/conv63_98 | timeout: 10s)
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [edge_elements.cpp:191] [create] Created (LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process)
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] EntryPushQEl0yolov8s/input_layer1 | inputs: user | outputs: PixBufEl0yolov8s/input_layer1
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PixBufEl0yolov8s/input_layer1 | inputs: EntryPushQEl0yolov8s/input_layer1 | outputs: PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 18:57:00.836] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] AsyncHwEl | inputs: PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y | outputs: PushQEl_nms8yolov8s/conv63_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms8yolov8s/conv63_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] NmsPPMuxEl0YOLOV8-Post-Process | inputs: PushQEl_nms1yolov8s/conv41_98 PushQEl_nms0yolov8s/conv42_98 PushQEl_nms4yolov8s/conv52_98 PushQEl_nms2yolov8s/conv53_98 PushQEl_nms5yolov8s/conv62_98 PushQEl_nms8yolov8s/conv63_98 | outputs: LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] LastAsyncEl0NmsPPMuxEl0YOLOV8-Post-Process | inputs: NmsPPMuxEl0YOLOV8-Post-Process | outputs: user
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms5yolov8s/conv62_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms4yolov8s/conv52_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms2yolov8s/conv53_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms1yolov8s/conv41_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PushQEl_nms0yolov8s/conv42_98 | inputs: AsyncHwEl | outputs: NmsPPMuxEl0YOLOV8-Post-Process
+[2021-11-19 18:57:00.840] [2452] [HailoRT] [info] [pipeline.cpp:831] [print_deep_description] PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv | inputs: PixBufEl0yolov8s/input_layer1 | outputs: AsyncHwEl
+[2021-11-19 18:57:00.908] [2468] [HailoRT] [info] [hef.cpp:1802] [get_network_group_and_network_name] No name was given. Addressing all networks of default network_group: yolov8s
+[2021-11-19 18:57:36.516] [2452] [HailoRT] [info] [async_infer_runner.cpp:86] [shutdown] Pipeline was aborted. Shutting it down
+[2021-11-19 18:57:36.516] [2476] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv is not running anymore, exiting..
+[2021-11-19 18:57:36.517] [2475] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y is not running anymore, exiting..
+[2021-11-19 18:57:36.517] [2482] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms8yolov8s/conv63_98 is not running anymore, exiting..
+[2021-11-19 18:57:36.523] [2459] [HailoRT] [info] [network_group.cpp:810] [operator()] Infer request was aborted by user
+[2021-11-19 18:57:36.523] [2477] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms1yolov8s/conv41_98 is not running anymore, exiting..
+[2021-11-19 18:57:36.523] [2478] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms0yolov8s/conv42_98 is not running anymore, exiting..
+[2021-11-19 18:57:36.523] [2480] [HailoRT] [info] [queue_elements.cpp:466] [operator()] Thread in element PushQEl_nms2yolov8s/conv53_98 is not running anymore, exiting..
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms8yolov8s/conv63_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms5yolov8s/conv62_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms4yolov8s/conv52_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms2yolov8s/conv53_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms1yolov8s/conv41_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PushQEl_nms0yolov8s/conv42_98 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:527] [execute_deactivate] enqueue() in element EntryPushQEl0yolov8s/input_layer1 was aborted, got status = HAILO_SHUTDOWN_EVENT_SIGNALED(57)
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element EntryPushQEl0yolov8s/input_layer1 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl1yolov8s/nv12_to_yuv_layer_input_y has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PostSplitPushQEl0yolov8s/nv12_to_yuv_layer_input_uv has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.525] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms1yolov8s/conv41_98 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.527] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms0yolov8s/conv42_98 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.529] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms4yolov8s/conv52_98 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.530] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms2yolov8s/conv53_98 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.531] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms5yolov8s/conv62_98 has 0 frames in his Queue on destruction
+[2021-11-19 18:57:36.531] [2452] [HailoRT] [info] [queue_elements.cpp:43] [~BaseQueueElement] Queue element PushQEl_nms8yolov8s/conv63_98 has 0 frames in his Queue on destruction

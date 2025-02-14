@@ -22,10 +22,10 @@ extern "C" {
 #endif
 
 int GLAD_GL_ES_VERSION_2_0 = 0;
-int GLAD_GL_EXT_YUV_target = 0;
-int GLAD_GL_EXT_texture_format_BGRA8888 = 0;
+int GLAD_GL_KHR_debug = 0;
 int GLAD_GL_OES_EGL_image = 0;
 int GLAD_GL_OES_EGL_image_external = 0;
+int GLAD_GL_OES_EGL_image_external_essl3 = 0;
 int GLAD_GL_OES_rgb8_rgba8 = 0;
 
 PFNGLACTIVETEXTUREPROC glad_glActiveTexture = NULL;
@@ -56,6 +56,9 @@ PFNGLCOPYTEXSUBIMAGE2DPROC glad_glCopyTexSubImage2D = NULL;
 PFNGLCREATEPROGRAMPROC glad_glCreateProgram = NULL;
 PFNGLCREATESHADERPROC glad_glCreateShader = NULL;
 PFNGLCULLFACEPROC glad_glCullFace = NULL;
+PFNGLDEBUGMESSAGECALLBACKKHRPROC glad_glDebugMessageCallbackKHR = NULL;
+PFNGLDEBUGMESSAGECONTROLKHRPROC glad_glDebugMessageControlKHR = NULL;
+PFNGLDEBUGMESSAGEINSERTKHRPROC glad_glDebugMessageInsertKHR = NULL;
 PFNGLDELETEBUFFERSPROC glad_glDeleteBuffers = NULL;
 PFNGLDELETEFRAMEBUFFERSPROC glad_glDeleteFramebuffers = NULL;
 PFNGLDELETEPROGRAMPROC glad_glDeleteProgram = NULL;
@@ -91,11 +94,15 @@ PFNGLGETATTACHEDSHADERSPROC glad_glGetAttachedShaders = NULL;
 PFNGLGETATTRIBLOCATIONPROC glad_glGetAttribLocation = NULL;
 PFNGLGETBOOLEANVPROC glad_glGetBooleanv = NULL;
 PFNGLGETBUFFERPARAMETERIVPROC glad_glGetBufferParameteriv = NULL;
+PFNGLGETDEBUGMESSAGELOGKHRPROC glad_glGetDebugMessageLogKHR = NULL;
 PFNGLGETERRORPROC glad_glGetError = NULL;
 PFNGLGETFLOATVPROC glad_glGetFloatv = NULL;
 PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC
     glad_glGetFramebufferAttachmentParameteriv = NULL;
 PFNGLGETINTEGERVPROC glad_glGetIntegerv = NULL;
+PFNGLGETOBJECTLABELKHRPROC glad_glGetObjectLabelKHR = NULL;
+PFNGLGETOBJECTPTRLABELKHRPROC glad_glGetObjectPtrLabelKHR = NULL;
+PFNGLGETPOINTERVKHRPROC glad_glGetPointervKHR = NULL;
 PFNGLGETPROGRAMINFOLOGPROC glad_glGetProgramInfoLog = NULL;
 PFNGLGETPROGRAMIVPROC glad_glGetProgramiv = NULL;
 PFNGLGETRENDERBUFFERPARAMETERIVPROC glad_glGetRenderbufferParameteriv = NULL;
@@ -122,8 +129,12 @@ PFNGLISSHADERPROC glad_glIsShader = NULL;
 PFNGLISTEXTUREPROC glad_glIsTexture = NULL;
 PFNGLLINEWIDTHPROC glad_glLineWidth = NULL;
 PFNGLLINKPROGRAMPROC glad_glLinkProgram = NULL;
+PFNGLOBJECTLABELKHRPROC glad_glObjectLabelKHR = NULL;
+PFNGLOBJECTPTRLABELKHRPROC glad_glObjectPtrLabelKHR = NULL;
 PFNGLPIXELSTOREIPROC glad_glPixelStorei = NULL;
 PFNGLPOLYGONOFFSETPROC glad_glPolygonOffset = NULL;
+PFNGLPOPDEBUGGROUPKHRPROC glad_glPopDebugGroupKHR = NULL;
+PFNGLPUSHDEBUGGROUPKHRPROC glad_glPushDebugGroupKHR = NULL;
 PFNGLREADPIXELSPROC glad_glReadPixels = NULL;
 PFNGLRELEASESHADERCOMPILERPROC glad_glReleaseShaderCompiler = NULL;
 PFNGLRENDERBUFFERSTORAGEPROC glad_glRenderbufferStorage = NULL;
@@ -392,6 +403,32 @@ static void glad_gl_load_GL_ES_VERSION_2_0(GLADuserptrloadfunc load,
       (PFNGLVERTEXATTRIBPOINTERPROC)load(userptr, "glVertexAttribPointer");
   glad_glViewport = (PFNGLVIEWPORTPROC)load(userptr, "glViewport");
 }
+static void glad_gl_load_GL_KHR_debug(GLADuserptrloadfunc load, void *userptr) {
+  if (!GLAD_GL_KHR_debug)
+    return;
+  glad_glDebugMessageCallbackKHR = (PFNGLDEBUGMESSAGECALLBACKKHRPROC)load(
+      userptr, "glDebugMessageCallbackKHR");
+  glad_glDebugMessageControlKHR = (PFNGLDEBUGMESSAGECONTROLKHRPROC)load(
+      userptr, "glDebugMessageControlKHR");
+  glad_glDebugMessageInsertKHR =
+      (PFNGLDEBUGMESSAGEINSERTKHRPROC)load(userptr, "glDebugMessageInsertKHR");
+  glad_glGetDebugMessageLogKHR =
+      (PFNGLGETDEBUGMESSAGELOGKHRPROC)load(userptr, "glGetDebugMessageLogKHR");
+  glad_glGetObjectLabelKHR =
+      (PFNGLGETOBJECTLABELKHRPROC)load(userptr, "glGetObjectLabelKHR");
+  glad_glGetObjectPtrLabelKHR =
+      (PFNGLGETOBJECTPTRLABELKHRPROC)load(userptr, "glGetObjectPtrLabelKHR");
+  glad_glGetPointervKHR =
+      (PFNGLGETPOINTERVKHRPROC)load(userptr, "glGetPointervKHR");
+  glad_glObjectLabelKHR =
+      (PFNGLOBJECTLABELKHRPROC)load(userptr, "glObjectLabelKHR");
+  glad_glObjectPtrLabelKHR =
+      (PFNGLOBJECTPTRLABELKHRPROC)load(userptr, "glObjectPtrLabelKHR");
+  glad_glPopDebugGroupKHR =
+      (PFNGLPOPDEBUGGROUPKHRPROC)load(userptr, "glPopDebugGroupKHR");
+  glad_glPushDebugGroupKHR =
+      (PFNGLPUSHDEBUGGROUPKHRPROC)load(userptr, "glPushDebugGroupKHR");
+}
 static void glad_gl_load_GL_OES_EGL_image(GLADuserptrloadfunc load,
                                           void *userptr) {
   if (!GLAD_GL_OES_EGL_image)
@@ -499,14 +536,13 @@ static int glad_gl_find_extensions_gles2(void) {
   if (!glad_gl_get_extensions(&exts, &exts_i))
     return 0;
 
-  GLAD_GL_EXT_YUV_target =
-      glad_gl_has_extension(exts, exts_i, "GL_EXT_YUV_target");
-  GLAD_GL_EXT_texture_format_BGRA8888 =
-      glad_gl_has_extension(exts, exts_i, "GL_EXT_texture_format_BGRA8888");
+  GLAD_GL_KHR_debug = glad_gl_has_extension(exts, exts_i, "GL_KHR_debug");
   GLAD_GL_OES_EGL_image =
       glad_gl_has_extension(exts, exts_i, "GL_OES_EGL_image");
   GLAD_GL_OES_EGL_image_external =
       glad_gl_has_extension(exts, exts_i, "GL_OES_EGL_image_external");
+  GLAD_GL_OES_EGL_image_external_essl3 =
+      glad_gl_has_extension(exts, exts_i, "GL_OES_EGL_image_external_essl3");
   GLAD_GL_OES_rgb8_rgba8 =
       glad_gl_has_extension(exts, exts_i, "GL_OES_rgb8_rgba8");
 
@@ -552,6 +588,7 @@ int gladLoadGLES2UserPtr(GLADuserptrloadfunc load, void *userptr) {
 
   if (!glad_gl_find_extensions_gles2())
     return 0;
+  glad_gl_load_GL_KHR_debug(load, userptr);
   glad_gl_load_GL_OES_EGL_image(load, userptr);
 
   return version;

@@ -29,10 +29,15 @@ int GLAD_EGL_VERSION_1_2 = 0;
 int GLAD_EGL_VERSION_1_3 = 0;
 int GLAD_EGL_VERSION_1_4 = 0;
 int GLAD_EGL_EXT_image_dma_buf_import = 0;
-int GLAD_EGL_EXT_yuv_surface = 0;
+int GLAD_EGL_KHR_create_context = 0;
+int GLAD_EGL_KHR_debug = 0;
 int GLAD_EGL_KHR_fence_sync = 0;
+int GLAD_EGL_KHR_gl_renderbuffer_image = 0;
+int GLAD_EGL_KHR_gl_texture_2D_image = 0;
+int GLAD_EGL_KHR_image = 0;
 int GLAD_EGL_KHR_image_base = 0;
-int GLAD_EGL_MESA_image_dma_buf_export = 0;
+int GLAD_EGL_KHR_image_pixmap = 0;
+int GLAD_EGL_KHR_reusable_sync = 0;
 
 
 
@@ -48,12 +53,11 @@ PFNEGLCREATEPBUFFERSURFACEPROC glad_eglCreatePbufferSurface = NULL;
 PFNEGLCREATEPIXMAPSURFACEPROC glad_eglCreatePixmapSurface = NULL;
 PFNEGLCREATESYNCKHRPROC glad_eglCreateSyncKHR = NULL;
 PFNEGLCREATEWINDOWSURFACEPROC glad_eglCreateWindowSurface = NULL;
+PFNEGLDEBUGMESSAGECONTROLKHRPROC glad_eglDebugMessageControlKHR = NULL;
 PFNEGLDESTROYCONTEXTPROC glad_eglDestroyContext = NULL;
 PFNEGLDESTROYIMAGEKHRPROC glad_eglDestroyImageKHR = NULL;
 PFNEGLDESTROYSURFACEPROC glad_eglDestroySurface = NULL;
 PFNEGLDESTROYSYNCKHRPROC glad_eglDestroySyncKHR = NULL;
-PFNEGLEXPORTDMABUFIMAGEMESAPROC glad_eglExportDMABUFImageMESA = NULL;
-PFNEGLEXPORTDMABUFIMAGEQUERYMESAPROC glad_eglExportDMABUFImageQueryMESA = NULL;
 PFNEGLGETCONFIGATTRIBPROC glad_eglGetConfigAttrib = NULL;
 PFNEGLGETCONFIGSPROC glad_eglGetConfigs = NULL;
 PFNEGLGETCURRENTCONTEXTPROC glad_eglGetCurrentContext = NULL;
@@ -64,13 +68,16 @@ PFNEGLGETERRORPROC glad_eglGetError = NULL;
 PFNEGLGETPROCADDRESSPROC glad_eglGetProcAddress = NULL;
 PFNEGLGETSYNCATTRIBKHRPROC glad_eglGetSyncAttribKHR = NULL;
 PFNEGLINITIALIZEPROC glad_eglInitialize = NULL;
+PFNEGLLABELOBJECTKHRPROC glad_eglLabelObjectKHR = NULL;
 PFNEGLMAKECURRENTPROC glad_eglMakeCurrent = NULL;
 PFNEGLQUERYAPIPROC glad_eglQueryAPI = NULL;
 PFNEGLQUERYCONTEXTPROC glad_eglQueryContext = NULL;
+PFNEGLQUERYDEBUGKHRPROC glad_eglQueryDebugKHR = NULL;
 PFNEGLQUERYSTRINGPROC glad_eglQueryString = NULL;
 PFNEGLQUERYSURFACEPROC glad_eglQuerySurface = NULL;
 PFNEGLRELEASETEXIMAGEPROC glad_eglReleaseTexImage = NULL;
 PFNEGLRELEASETHREADPROC glad_eglReleaseThread = NULL;
+PFNEGLSIGNALSYNCKHRPROC glad_eglSignalSyncKHR = NULL;
 PFNEGLSURFACEATTRIBPROC glad_eglSurfaceAttrib = NULL;
 PFNEGLSWAPBUFFERSPROC glad_eglSwapBuffers = NULL;
 PFNEGLSWAPINTERVALPROC glad_eglSwapInterval = NULL;
@@ -126,6 +133,12 @@ static void glad_egl_load_EGL_VERSION_1_4( GLADuserptrloadfunc load, void* userp
     if(!GLAD_EGL_VERSION_1_4) return;
     glad_eglGetCurrentContext = (PFNEGLGETCURRENTCONTEXTPROC) load(userptr, "eglGetCurrentContext");
 }
+static void glad_egl_load_EGL_KHR_debug( GLADuserptrloadfunc load, void* userptr) {
+    if(!GLAD_EGL_KHR_debug) return;
+    glad_eglDebugMessageControlKHR = (PFNEGLDEBUGMESSAGECONTROLKHRPROC) load(userptr, "eglDebugMessageControlKHR");
+    glad_eglLabelObjectKHR = (PFNEGLLABELOBJECTKHRPROC) load(userptr, "eglLabelObjectKHR");
+    glad_eglQueryDebugKHR = (PFNEGLQUERYDEBUGKHRPROC) load(userptr, "eglQueryDebugKHR");
+}
 static void glad_egl_load_EGL_KHR_fence_sync( GLADuserptrloadfunc load, void* userptr) {
     if(!GLAD_EGL_KHR_fence_sync) return;
     glad_eglClientWaitSyncKHR = (PFNEGLCLIENTWAITSYNCKHRPROC) load(userptr, "eglClientWaitSyncKHR");
@@ -133,15 +146,23 @@ static void glad_egl_load_EGL_KHR_fence_sync( GLADuserptrloadfunc load, void* us
     glad_eglDestroySyncKHR = (PFNEGLDESTROYSYNCKHRPROC) load(userptr, "eglDestroySyncKHR");
     glad_eglGetSyncAttribKHR = (PFNEGLGETSYNCATTRIBKHRPROC) load(userptr, "eglGetSyncAttribKHR");
 }
+static void glad_egl_load_EGL_KHR_image( GLADuserptrloadfunc load, void* userptr) {
+    if(!GLAD_EGL_KHR_image) return;
+    glad_eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) load(userptr, "eglCreateImageKHR");
+    glad_eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) load(userptr, "eglDestroyImageKHR");
+}
 static void glad_egl_load_EGL_KHR_image_base( GLADuserptrloadfunc load, void* userptr) {
     if(!GLAD_EGL_KHR_image_base) return;
     glad_eglCreateImageKHR = (PFNEGLCREATEIMAGEKHRPROC) load(userptr, "eglCreateImageKHR");
     glad_eglDestroyImageKHR = (PFNEGLDESTROYIMAGEKHRPROC) load(userptr, "eglDestroyImageKHR");
 }
-static void glad_egl_load_EGL_MESA_image_dma_buf_export( GLADuserptrloadfunc load, void* userptr) {
-    if(!GLAD_EGL_MESA_image_dma_buf_export) return;
-    glad_eglExportDMABUFImageMESA = (PFNEGLEXPORTDMABUFIMAGEMESAPROC) load(userptr, "eglExportDMABUFImageMESA");
-    glad_eglExportDMABUFImageQueryMESA = (PFNEGLEXPORTDMABUFIMAGEQUERYMESAPROC) load(userptr, "eglExportDMABUFImageQueryMESA");
+static void glad_egl_load_EGL_KHR_reusable_sync( GLADuserptrloadfunc load, void* userptr) {
+    if(!GLAD_EGL_KHR_reusable_sync) return;
+    glad_eglClientWaitSyncKHR = (PFNEGLCLIENTWAITSYNCKHRPROC) load(userptr, "eglClientWaitSyncKHR");
+    glad_eglCreateSyncKHR = (PFNEGLCREATESYNCKHRPROC) load(userptr, "eglCreateSyncKHR");
+    glad_eglDestroySyncKHR = (PFNEGLDESTROYSYNCKHRPROC) load(userptr, "eglDestroySyncKHR");
+    glad_eglGetSyncAttribKHR = (PFNEGLGETSYNCATTRIBKHRPROC) load(userptr, "eglGetSyncAttribKHR");
+    glad_eglSignalSyncKHR = (PFNEGLSIGNALSYNCKHRPROC) load(userptr, "eglSignalSyncKHR");
 }
 
 
@@ -181,10 +202,15 @@ static int glad_egl_find_extensions_egl(EGLDisplay display) {
     if (!glad_egl_get_extensions(display, &extensions)) return 0;
 
     GLAD_EGL_EXT_image_dma_buf_import = glad_egl_has_extension(extensions, "EGL_EXT_image_dma_buf_import");
-    GLAD_EGL_EXT_yuv_surface = glad_egl_has_extension(extensions, "EGL_EXT_yuv_surface");
+    GLAD_EGL_KHR_create_context = glad_egl_has_extension(extensions, "EGL_KHR_create_context");
+    GLAD_EGL_KHR_debug = glad_egl_has_extension(extensions, "EGL_KHR_debug");
     GLAD_EGL_KHR_fence_sync = glad_egl_has_extension(extensions, "EGL_KHR_fence_sync");
+    GLAD_EGL_KHR_gl_renderbuffer_image = glad_egl_has_extension(extensions, "EGL_KHR_gl_renderbuffer_image");
+    GLAD_EGL_KHR_gl_texture_2D_image = glad_egl_has_extension(extensions, "EGL_KHR_gl_texture_2D_image");
+    GLAD_EGL_KHR_image = glad_egl_has_extension(extensions, "EGL_KHR_image");
     GLAD_EGL_KHR_image_base = glad_egl_has_extension(extensions, "EGL_KHR_image_base");
-    GLAD_EGL_MESA_image_dma_buf_export = glad_egl_has_extension(extensions, "EGL_MESA_image_dma_buf_export");
+    GLAD_EGL_KHR_image_pixmap = glad_egl_has_extension(extensions, "EGL_KHR_image_pixmap");
+    GLAD_EGL_KHR_reusable_sync = glad_egl_has_extension(extensions, "EGL_KHR_reusable_sync");
 
     return 1;
 }
@@ -245,9 +271,11 @@ int gladLoadEGLUserPtr(EGLDisplay display, GLADuserptrloadfunc load, void* userp
     glad_egl_load_EGL_VERSION_1_4(load, userptr);
 
     if (!glad_egl_find_extensions_egl(display)) return 0;
+    glad_egl_load_EGL_KHR_debug(load, userptr);
     glad_egl_load_EGL_KHR_fence_sync(load, userptr);
+    glad_egl_load_EGL_KHR_image(load, userptr);
     glad_egl_load_EGL_KHR_image_base(load, userptr);
-    glad_egl_load_EGL_MESA_image_dma_buf_export(load, userptr);
+    glad_egl_load_EGL_KHR_reusable_sync(load, userptr);
 
 
     return version;

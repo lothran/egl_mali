@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(egl_headless)
-add_executable(egl_headless main.cpp egl.c gles2.c)
+add_executable(egl_headless main.cpp egl.c gles2.c common.cpp v4l2_device.cpp)
 
 target_include_directories(egl_headless PUBLIC include)
 
